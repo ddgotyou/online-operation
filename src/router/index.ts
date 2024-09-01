@@ -1,4 +1,4 @@
-import { createRouter, createWebHashHistory, RouteRecordRaw } from "vue-router";
+import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -6,10 +6,16 @@ const routes: Array<RouteRecordRaw> = [
     name: "login",
     component: () => import("../views/login/LoginView.vue"),
   },
+  //editor路径
+  {
+    path: "/pic_editor",
+    name: "picEditor",
+    component: () => import("../views/picEditor/PicEditor.vue"),
+  },
 ];
 
 const router = createRouter({
-  history: createWebHashHistory(),
+  history: createWebHistory(),
   routes,
 });
 
