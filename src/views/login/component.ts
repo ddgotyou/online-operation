@@ -1,6 +1,7 @@
 import { defineComponent } from "vue";
 import { getUsers } from "@/api/users";
 import { UserInfo } from "@/types/userType";
+import { USER_KEY } from "@/global";
 
 export default defineComponent({
   data() {
@@ -22,15 +23,14 @@ export default defineComponent({
       const res = await getUsers(params);
       this.userInfo = res?.data as UserInfo;
       console.log(this.userInfo);
+      //存储用户信息
+      localStorage.setItem(USER_KEY, JSON.stringify(this.userInfo));
       //@ts-ignore
       if (this.userInfo && this.userInfo._id) {
         console.log("inin");
         //@ts-ignore
         this.$router.push({
           path: "/pic_editor",
-          query: {
-            user_info: JSON.stringify(this.userInfo),
-          },
         });
       }
     },
