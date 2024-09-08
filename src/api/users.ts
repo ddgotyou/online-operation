@@ -1,8 +1,7 @@
 //向http://localhost:3000/users发送请求 获取用户数据
 import axios from "axios";
 import type { QueryUser } from "@/types/userType";
-
-export const ENV_SERVER = "http://localhost:3000";
+import { ENV_SERVER } from "@/global";
 
 //配置axios默认baseURL
 axios.defaults.baseURL = ENV_SERVER;
