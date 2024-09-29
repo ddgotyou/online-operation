@@ -1,5 +1,21 @@
 .text-area {
   display: inline-block;
-  width: 100px;
+  width: 500px;
   height: 100px;
+}
+
+.userList {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 150px;
+  height: 500px;
+  border: 1px solid grey;
+}
+
+.docInfo {
+  width: 500px;
+  text-align: left;
+  border: 1px solid black;
+  margin: 20px auto;
 }

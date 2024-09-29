@@ -1,16 +1,17 @@
 import { defineComponent } from "vue";
 import { UserInfo } from "@/types/userType";
 import { USER_KEY } from "@/global";
-import { getDocInfo } from "@/api/editor";
+import { getDocInfo, updateDocContent } from "@/api/editor";
 import WebSocketInstance from "@/api/wsService";
+import { DocType } from "@/types/docType";
 
 export default defineComponent({
   name: "PicEditor",
   data() {
     return {
       userInfo: {} as UserInfo,
-      text: "Hello World",
-      docInfo: "",
+      docText: "",
+      docInfo: {} as DocType,
       socket: new WebSocketInstance("/ws"),
     };
   },
@@ -29,7 +30,21 @@ export default defineComponent({
   },
   methods: {
     async getDoc() {
-      this.docInfo = await getDocInfo();
+      this.docInfo = await getDocInfo({ doc_id: "66f9208eac571ebed29f2e9c" });
+      //获取文档内容
+      this.docText = this.docInfo.content ?? "";
+      console.log("此时编辑的文档信息", this.docInfo);
+    },
+    //保存文档内容
+    async save() {
+      const status = await updateDocContent({
+        doc_id: "66f9208eac571ebed29f2e9c",
+        content: this.docText,
+      });
+      console.log(status);
+      if (status) {
+        console.log("保存成功");
+      }
     },
   },
 });
