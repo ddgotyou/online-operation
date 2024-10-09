@@ -13,20 +13,24 @@ export default defineComponent({
       docText: "",
       docInfo: {} as DocType,
       socket: new WebSocketInstance("/ws"),
+      onlineUserList: [] as UserInfo[],
     };
   },
+  beforeUnmount() {
+    this.socket.close();
+  },
   mounted() {
-    this.userInfo = JSON.parse(
-      localStorage.getItem(USER_KEY) || "{}"
-    ) as UserInfo;
+    //获取用户信息
+    this.fetchUser();
     //获取文档信息
     this.getDoc();
     //创建socket链接
-    this.socket.createSocket();
+    this.socket.createSocket(this.userInfo);
     //推送消息
     setInterval(() => {
-      this.socket.sendAsString("hello server");
-    }, 1000);
+      // this.socket.sendAsString("hello server");
+      this.onlineUserList = this.socket.fetchOnlineUser();
+    }, 100);
   },
   methods: {
     async getDoc() {
@@ -45,6 +49,12 @@ export default defineComponent({
       if (status) {
         console.log("保存成功");
       }
+    },
+    //获取当前用户信息和在线用户信息
+    async fetchUser() {
+      this.userInfo = JSON.parse(
+        localStorage.getItem(USER_KEY) || "{}"
+      ) as UserInfo;
     },
   },
 });

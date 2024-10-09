@@ -4,12 +4,8 @@ export type QueryUser = {
 
 export type UserInfo = {
   id: number | string;
-  userName: string;
+  user_name: string;
   password?: string;
   role?: string;
   token?: string;
-  // token: string | null,
-  // token: string | undefined,
-  // token: string | null | undefined,
-  // token: string | null | undefined | null,
 };

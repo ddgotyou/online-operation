@@ -1,7 +1,17 @@
 <template>
   <div class="editor">
     <h1>This is an editor page</h1>
-    <div class="userList"></div>
+    <div class="userList">
+      <ul v-if="onlineUserList">
+        <li v-for="(item, index) in onlineUserList" :key="index">
+          <span
+            :class="{ 'user-highlight': item.user_name === userInfo.user_name }"
+          >
+            {{ item.user_name }}</span
+          >
+        </li>
+      </ul>
+    </div>
     <div class="content">
       <div class="docInfo">
         文档信息
