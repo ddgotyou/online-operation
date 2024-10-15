@@ -3,7 +3,7 @@ export type QueryUser = {
 };
 
 export type UserInfo = {
-  id: number | string;
+  _id: number | string;
   user_name: string;
   password?: string;
   role?: string;

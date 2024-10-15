@@ -7,7 +7,7 @@ export default defineComponent({
   data() {
     return {
       userInfo: {
-        id: "",
+        _id: "",
         user_name: "",
       } as UserInfo,
     };
@@ -27,7 +27,6 @@ export default defineComponent({
       localStorage.setItem(USER_KEY, JSON.stringify(this.userInfo));
       //@ts-ignore
       if (this.userInfo && this.userInfo._id) {
-        console.log("inin");
         //@ts-ignore
         this.$router.push({
           path: "/pic_editor",

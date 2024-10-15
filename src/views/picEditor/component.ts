@@ -3,7 +3,7 @@ import { UserInfo } from "@/types/userType";
 import { USER_KEY } from "@/global";
 import { getDocInfo, updateDocContent } from "@/api/editor";
 import WebSocketInstance from "@/api/wsService";
-import { DocType } from "@/types/docType";
+import { DocType, DocLogType } from "@/types/docType";
 
 export default defineComponent({
   name: "PicEditor",
@@ -14,6 +14,8 @@ export default defineComponent({
       docInfo: {} as DocType,
       socket: new WebSocketInstance("/ws"),
       onlineUserList: [] as UserInfo[],
+      //本地操作日志栈
+      localLogStack: [] as DocLogType[],
     };
   },
   beforeUnmount() {
@@ -22,14 +24,16 @@ export default defineComponent({
   mounted() {
     //获取用户信息
     this.fetchUser();
-    //获取文档信息
-    this.getDoc();
     //创建socket链接
     this.socket.createSocket(this.userInfo);
+    this.socket.messageCb(this.applyOp);
+    //获取文档信息
+    this.getDoc();
     //推送消息
     setInterval(() => {
       // this.socket.sendAsString("hello server");
-      this.onlineUserList = this.socket.fetchOnlineUser();
+      if (this.docInfo._id)
+        this.onlineUserList = this.socket.fetchOnlineUser(this.docInfo._id);
     }, 100);
   },
   methods: {
@@ -37,7 +41,8 @@ export default defineComponent({
       this.docInfo = await getDocInfo({ doc_id: "66f9208eac571ebed29f2e9c" });
       //获取文档内容
       this.docText = this.docInfo.content ?? "";
-      console.log("此时编辑的文档信息", this.docInfo);
+      //发送文档信息
+      this.socket.sendAsString(this.docInfo);
     },
     //保存文档内容
     async save() {
@@ -55,6 +60,56 @@ export default defineComponent({
       this.userInfo = JSON.parse(
         localStorage.getItem(USER_KEY) || "{}"
       ) as UserInfo;
+    },
+    inputDoc(e: any) {
+      console.log(e, e.target.selectionStart);
+      //操作原子化
+      const newlog = {
+        type: "",
+        diff_content: "",
+        position: 0,
+        update_time: new Date().getTime(),
+        op_user: this.userInfo._id,
+      };
+
+      //-----input还有撤销操作可支持
+      let op_position = e.target.selectionStart;
+      if (e.inputType === "deleteContentBackward") {
+        newlog.type = "delete";
+      } else if (e.inputType === "insertText") {
+        op_position -= 1;
+        newlog.type = "insert";
+        newlog.diff_content = e.data;
+      } else if (e.inputType === "historyUndo") {
+        //----撤销上一次操作
+        console.log("撤销");
+      }
+      newlog.position = op_position;
+      this.localLogStack.push(newlog);
+      this.socket.sendAsString(newlog);
+    },
+
+    //应用操作日志更新内容
+    applyOp(msg: any) {
+      try {
+        const op = JSON.parse(msg);
+        if (typeof op === "object") {
+          if (op.type === "insert") {
+            this.docText =
+              this.docText.slice(0, op.position) +
+              op.diff_content +
+              this.docText.slice(op.position);
+            this.docInfo.content = this.docText;
+          } else if (op.type === "delete") {
+            this.docText =
+              this.docText.slice(0, op.position) +
+              this.docText.slice(op.position + 1);
+            this.docInfo.content = this.docText;
+          }
+        }
+      } catch (e) {
+        console.log(e);
+      }
     },
   },
 });

@@ -21,7 +21,11 @@
           </li>
         </ul>
       </div>
-      <textarea v-model="docText" class="text-area"></textarea>
+      <textarea
+        v-model="docText"
+        class="text-area"
+        @input="inputDoc"
+      ></textarea>
       <button @click="save">提交</button>
     </div>
   </div>

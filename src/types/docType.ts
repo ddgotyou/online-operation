@@ -5,3 +5,11 @@ export type DocType = {
   content: string;
   update_time: string;
 };
+
+export type DocLogType = {
+  type: string;
+  diff_content: string;
+  position: number;
+  update_time: number | string;
+  op_user: number | string;
+};
