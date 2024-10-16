@@ -16,6 +16,8 @@ export default defineComponent({
       onlineUserList: [] as UserInfo[],
       //本地操作日志栈
       localLogStack: [] as DocLogType[],
+      //文本选择范围
+      selectRange: 0,
     };
   },
   beforeUnmount() {
@@ -60,13 +62,20 @@ export default defineComponent({
         localStorage.getItem(USER_KEY) || "{}"
       ) as UserInfo;
     },
+    //聚焦事件监听，获取光标范围
+    focusDoc(e: any) {
+      console.log("focus", e.target.selectionStart, e.target.selectionEnd);
+      this.selectRange = e.target.selectionEnd - e.target.selectionStart;
+    },
+    //输入事件监听
     inputDoc(e: any) {
-      console.log(e, e.target.selectionStart);
+      console.log(e, e.target.selectionStart, e.target.selectionEnd);
       //操作原子化
       const newlog = {
         type: "",
         diff_content: "",
         position: 0,
+        diff_length: 0,
         update_time: new Date().getTime(),
         op_user: this.userInfo._id,
       };
@@ -84,6 +93,10 @@ export default defineComponent({
         console.log("撤销");
       }
       newlog.position = op_position;
+      //如果新旧文本的操作差异大于等于1，则认为通过选中进行修改
+      if (Math.abs(this.docInfo.content.length - this.docText.length) > 1) {
+        newlog.diff_length = this.selectRange;
+      }
       this.localLogStack.push(newlog);
       this.socket.sendAsString(newlog);
     },

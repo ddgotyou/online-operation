@@ -25,6 +25,7 @@
         v-model="docText"
         class="text-area"
         @input="inputDoc"
+        @select="focusDoc"
       ></textarea>
       <button @click="save">提交</button>
     </div>

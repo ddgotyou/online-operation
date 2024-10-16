@@ -10,6 +10,7 @@ export type DocLogType = {
   type: string;
   diff_content: string;
   position: number;
+  diff_length?: number;
   update_time: number | string;
   op_user: number | string;
 };
