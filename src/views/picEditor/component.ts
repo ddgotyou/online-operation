@@ -31,7 +31,6 @@ export default defineComponent({
     this.getDoc();
     //推送消息
     setInterval(() => {
-      // this.socket.sendAsString("hello server");
       if (this.docInfo._id)
         this.onlineUserList = this.socket.fetchOnlineUser(this.docInfo._id);
     }, 100);
