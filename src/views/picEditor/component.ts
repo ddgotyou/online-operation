@@ -43,7 +43,7 @@ export default defineComponent({
       //获取文档内容
       this.docText = this.docInfo.content ?? "";
       //发送文档信息
-      this.socket.sendAsString(this.docInfo);
+      this.socket.sendAsString("docInfo", this.docInfo);
     },
     //保存文档内容
     async save() {
@@ -98,13 +98,13 @@ export default defineComponent({
         newlog.diff_length = this.selectRange;
       }
       this.localLogStack.push(newlog);
-      this.socket.sendAsString(newlog);
+      this.socket.sendAsString("oplog", newlog);
     },
 
     //应用操作日志更新内容
     applyOp(msg: any) {
       try {
-        const op = JSON.parse(msg);
+        const op = JSON.parse(msg).data;
         if (typeof op === "object") {
           if (op.type === "insert") {
             this.docText =
