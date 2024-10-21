@@ -143,7 +143,7 @@ class WebSocketInstance {
       const msg = JSON.parse(wsObj.data);
       const { type } = msg;
       switch (type) {
-        case "oplog": {
+        case "opAlert": {
           this.messageArr.push(msg);
           cb(msg);
           break;
