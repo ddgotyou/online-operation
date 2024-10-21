@@ -3,7 +3,7 @@ import { UserInfo } from "@/types/userType";
 import { USER_KEY } from "@/global";
 import { getDocInfo, updateDocContent } from "@/api/editor";
 import WebSocketInstance from "@/api/wsService";
-import { DocType, DocLogType } from "@/types/docType";
+import { DocType, DocLogType, FocusStateType } from "@/types/docType";
 
 export default defineComponent({
   name: "PicEditor",
@@ -19,6 +19,10 @@ export default defineComponent({
       //文本选择范围
       selectRange: 0,
       listnerTimer: 0,
+      //所有用户的焦点位置
+      allUserfocusState: [] as FocusStateType[],
+      // 当前用户的焦点状态
+      curUserFocusState: {} as FocusStateType,
     };
   },
   beforeUnmount() {
@@ -40,8 +44,18 @@ export default defineComponent({
     this.listnerTimer = setInterval(() => {
       const isConnect = this.socket.checkConnect();
       if (isConnect) {
-        if (this.docInfo._id)
+        if (this.docInfo._id) {
+          // 获取在线用户列表
           this.onlineUserList = this.socket.fetchOnlineUser();
+          // 更新获取用户的聚焦状态
+          this.allUserfocusState = [...this.socket.updateFocusUserArr()];
+          if (
+            this.curUserFocusState.focus_pos &&
+            this.curUserFocusState.focus_pos.length > 0
+          ) {
+            this.allUserfocusState.unshift(this.curUserFocusState);
+          }
+        }
       } else {
         console.log("断开连接，重定向界面");
         // 断开链接
@@ -77,9 +91,41 @@ export default defineComponent({
         localStorage.getItem(USER_KEY) || "{}"
       ) as UserInfo;
     },
-    //聚焦事件监听，获取光标范围
+    // 聚焦监听
     focusDoc(e: any) {
-      console.log("focus", e.target.selectionStart, e.target.selectionEnd);
+      console.log("focusDoc");
+      this.curUserFocusState = {
+        focus_user: {
+          _id: this.userInfo._id,
+          user_name: this.userInfo.user_name,
+        },
+        focus_pos: [0, 0],
+      };
+      // 通知change focus状态
+      this.socket.sendAsString("updateFocusState", {
+        doc: this.docInfo._id,
+        focusState: this.curUserFocusState,
+      });
+    },
+    // 失焦监听
+    blurDoc(e: any) {
+      console.log("blurDoc");
+      this.curUserFocusState = {
+        focus_user: {
+          _id: this.userInfo._id,
+          user_name: this.userInfo.user_name,
+        },
+        focus_pos: [],
+      };
+      // 通知change focus状态
+      this.socket.sendAsString("updateFocusState", {
+        doc: this.docInfo._id,
+        focusState: this.curUserFocusState,
+      });
+    },
+    //聚焦选择事件监听，获取光标范围
+    selectDoc(e: any) {
+      console.log("selectDoc", e.target.selectionStart, e.target.selectionEnd);
       this.selectRange = e.target.selectionEnd - e.target.selectionStart;
     },
     //输入事件监听
@@ -120,7 +166,7 @@ export default defineComponent({
     //应用操作日志更新内容
     applyOp(msg: any) {
       try {
-        const op = JSON.parse(msg).data;
+        const op = msg.data;
         if (typeof op === "object") {
           if (op.type === "insert") {
             this.docText =

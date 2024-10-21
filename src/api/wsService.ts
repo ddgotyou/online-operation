@@ -1,5 +1,6 @@
 import { WS_SERVER } from "@/global";
 import { UserInfo } from "@/types/userType";
+import { FocusStateType } from "@/types/docType";
 class WebSocketInstance {
   url: string;
   curUser: UserInfo;
@@ -10,13 +11,18 @@ class WebSocketInstance {
   hearbeatInterval: number | null;
   pongLastTime: number;
   doc_id: string;
+  focusUserArr: FocusStateType[];
   constructor(url: string) {
     this.url = `${WS_SERVER}${url}`;
+    // 信息数组
     this.messageArr = [];
     this.userArr = [];
+    this.focusUserArr = [];
+    //接口
     this.socket = null;
     this.userSocket = null;
     this.curUser = {} as UserInfo;
+    //心跳定时器
     this.hearbeatInterval = null;
     // 后台心跳最后一次活跃时间
     this.pongLastTime = 0;
@@ -78,6 +84,12 @@ class WebSocketInstance {
     this.userSocket?.send(this.typeMsg("fetchOnlineUser", this.doc_id));
     return this.userArr;
   }
+  updateFocusUserArr(): FocusStateType[] {
+    // 获取除了本用户的其他用户
+    return this.focusUserArr.filter(
+      (item) => item.focus_user._id !== this.curUser._id
+    );
+  }
   getOpMessage() {
     return this.messageArr.filter(
       (item) => item.includes("insert") || item.includes("delete")
@@ -128,8 +140,19 @@ class WebSocketInstance {
     // 使用WebSocket的原生方法onmessage与服务器关联
     this.socket.onmessage = (wsObj) => {
       console.log("收到消息", wsObj.data);
-      this.messageArr.push(wsObj.data);
-      cb(wsObj.data);
+      const msg = JSON.parse(wsObj.data);
+      const { type } = msg;
+      switch (type) {
+        case "oplog": {
+          this.messageArr.push(msg);
+          cb(msg);
+          break;
+        }
+        case "focusUser": {
+          this.focusUserArr = [...msg.data];
+          break;
+        }
+      }
     };
   }
   // 重新连接

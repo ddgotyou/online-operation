@@ -21,11 +21,22 @@
           </li>
         </ul>
       </div>
+      <div class="focusUser">
+        <div
+          class="focusUserItem"
+          v-for="(item, index) in allUserfocusState"
+          :key="index"
+        >
+          <span>{{ item.focus_user.user_name[0] }}</span>
+        </div>
+      </div>
       <textarea
         v-model="docText"
         class="text-area"
         @input="inputDoc"
-        @select="focusDoc"
+        @select="selectDoc"
+        @focus="focusDoc"
+        @blur="blurDoc"
       ></textarea>
       <button @click="save">提交</button>
     </div>

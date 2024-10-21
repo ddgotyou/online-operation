@@ -15,3 +15,11 @@ export type DocLogType = {
   op_user: number | string;
   doc_id: string;
 };
+
+export type FocusStateType = {
+  focus_pos: Array<number>;
+  focus_user: {
+    _id: number | string;
+    user_name: string;
+  };
+};
