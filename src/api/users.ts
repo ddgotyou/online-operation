@@ -6,10 +6,20 @@ import { ENV_SERVER } from "@/global";
 //配置axios默认baseURL
 axios.defaults.baseURL = ENV_SERVER;
 export const queryUser = async (param: QueryUser) => {
-  const { user_name } = param;
-  if (!user_name) return;
+  const { user_name, password } = param;
   try {
-    const res = await axios.get("/getUser", { params: { user_name } });
+    const res = await axios.get("/getUser", {
+      params: { user_name, password },
+    });
+    return res;
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+export const registerUser = async (params: QueryUser) => {
+  try {
+    const res = await axios.post("/register", params);
     return res;
   } catch (err) {
     console.log(err);

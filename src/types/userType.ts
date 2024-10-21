@@ -1,5 +1,6 @@
 export type QueryUser = {
   user_name: string;
+  password?: string;
 };
 
 export type UserInfo = {
