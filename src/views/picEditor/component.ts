@@ -18,32 +18,47 @@ export default defineComponent({
       localLogStack: [] as DocLogType[],
       //文本选择范围
       selectRange: 0,
+      listnerTimer: 0,
     };
   },
   beforeUnmount() {
     this.socket.close();
+    clearInterval(this.listnerTimer);
   },
-  mounted() {
+  async mounted() {
     //获取用户信息
     this.fetchUser();
-    //创建socket链接
-    this.socket.createSocket(this.userInfo);
-    this.socket.messageCb(this.applyOp);
     //获取文档信息
-    this.getDoc();
-    //推送消息
-    setInterval(() => {
-      if (this.docInfo._id)
-        this.onlineUserList = this.socket.fetchOnlineUser(this.docInfo._id);
-    }, 100);
+    await this.getDoc();
+    //创建socket链接
+    this.socket.createSocket(this.userInfo, this.docInfo._id);
+    this.socket.messageCb(this.applyOp);
+    //发送文档信息
+    this.socket.sendAsString("docInfo", this.docInfo);
+
+    // 定时获取用户在线列表、检测端连状态
+    this.listnerTimer = setInterval(() => {
+      const isConnect = this.socket.checkConnect();
+      if (isConnect) {
+        if (this.docInfo._id)
+          this.onlineUserList = this.socket.fetchOnlineUser();
+      } else {
+        console.log("断开连接，重定向界面");
+        // 断开链接
+        //-----NOTE：简化处理，跳回login界面
+        this.$router.push({
+          path: "/",
+        });
+      }
+    }, 300);
+    // 定时传递用户心跳
+    this.socket.ping();
   },
   methods: {
     async getDoc() {
       this.docInfo = await getDocInfo({ doc_id: "66f9208eac571ebed29f2e9c" });
       //获取文档内容
       this.docText = this.docInfo.content ?? "";
-      //发送文档信息
-      this.socket.sendAsString("docInfo", this.docInfo);
     },
     //保存文档内容
     async save() {
@@ -78,6 +93,7 @@ export default defineComponent({
         diff_length: 0,
         update_time: new Date().getTime(),
         op_user: this.userInfo._id,
+        doc_id: this.docInfo._id,
       };
 
       //-----input还有撤销操作可支持
@@ -110,12 +126,13 @@ export default defineComponent({
             this.docText =
               this.docText.slice(0, op.position) +
               op.diff_content +
-              this.docText.slice(op.position);
+              this.docText.slice(op.position + (op.diff_length ?? 0));
             this.docInfo.content = this.docText;
           } else if (op.type === "delete") {
+            const len = op.diff_length ? op.diff_length : 1;
             this.docText =
               this.docText.slice(0, op.position) +
-              this.docText.slice(op.position + 1);
+              this.docText.slice(op.position + len);
             this.docInfo.content = this.docText;
           }
         }

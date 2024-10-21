@@ -13,4 +13,5 @@ export type DocLogType = {
   diff_length?: number;
   update_time: number | string;
   op_user: number | string;
+  doc_id: string;
 };
