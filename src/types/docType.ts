@@ -4,6 +4,7 @@ export type DocType = {
   doc_name: string;
   content: string;
   update_time: string;
+  doc_type: string;
 };
 
 export type DocLogType = {
