@@ -71,8 +71,13 @@ export default defineComponent({
       //@ts-ignore
       if (this.userInfo && this.userInfo._id) {
         //@ts-ignore
+        //---测试字符串编辑界面
+        // this.$router.push({
+        //   path: "/pic_editor",
+        // });
+        //表格编辑界面
         this.$router.push({
-          path: "/pic_editor",
+          path: "/table_editor",
         });
       } else {
         //不存在用户

@@ -6,11 +6,16 @@ const routes: Array<RouteRecordRaw> = [
     name: "login",
     component: () => import("../views/login/LoginView.vue"),
   },
-  //editor路径
+  //editor字符串test路径
   {
     path: "/pic_editor",
     name: "picEditor",
     component: () => import("../views/picEditor/PicEditor.vue"),
+  },
+  {
+    path: "/table_editor",
+    name: "tableEditor",
+    component: () => import("../views/tableEditor/TableEditor.vue"),
   },
 ];
 
