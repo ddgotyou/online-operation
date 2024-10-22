@@ -74,6 +74,15 @@ export default defineComponent({
         this.$router.push({
           path: "/pic_editor",
         });
+      } else {
+        //不存在用户
+        showDialog({
+          title: "账号或密码错误",
+          message: "请重新登录",
+          showCancelButton: true,
+        }).then(() => {
+          this.userInfo = {} as UserInfo;
+        });
       }
     },
   },
