@@ -3,3 +3,15 @@
   margin: 10px auto;
   justify-content: center;
 }
+
+.user-list {
+  display: flex;
+  width: 80%;
+  margin: 10px auto;
+  padding: 0 20px;
+  align-items: center;
+  height: 100px;
+  border: 1px solid gainsboro;
+  border-radius: 5px;
+  overflow-x: auto;
+}

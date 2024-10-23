@@ -23,4 +23,5 @@ export type FocusStateType = {
     _id: number | string;
     user_name: string;
   };
+  color?: string;
 };
