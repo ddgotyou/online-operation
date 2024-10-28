@@ -2,7 +2,7 @@ import { defineComponent, handleError } from "vue";
 import { UserInfo } from "@/types/userType";
 import { USER_KEY } from "@/global";
 // 引入tiptap编辑器库
-import { Editor, EditorContent, EditorEvents } from "@tiptap/vue-3";
+import { Editor, EditorContent } from "@tiptap/vue-3";
 import StarterKit from "@tiptap/starter-kit";
 import Table from "@tiptap/extension-table";
 import TableRow from "@tiptap/extension-table-row";
@@ -40,7 +40,6 @@ export default defineComponent({
       curUserFocusState: {} as FocusStateType,
       // 颜色map
       colorMap: {} as any,
-      isCommandsTrigger: false,
     };
   },
   beforeUnmount() {
@@ -90,18 +89,6 @@ export default defineComponent({
     this.socket.ping();
   },
   watch: {
-    "docInfo.content": {
-      handler(newVal) {
-        if (newVal) {
-          // console.log("更新的文档内容", newVal);
-          const timer = setTimeout(() => {
-            // 保存文档
-            this.save();
-            clearInterval(timer);
-          }, 500);
-        }
-      },
-    },
     onlineUserList: {
       handler(newVal: any, oldVal: any) {
         if (newVal && oldVal && newVal.length !== oldVal.length) {
@@ -139,7 +126,10 @@ export default defineComponent({
         doc_id: "67177d42b2b46e815e9b4e14",
         content: this.docInfo.content,
       });
-      console.log("保存状态", status);
+      console.log(status);
+      if (status) {
+        console.log("保存成功");
+      }
     },
     initSheet(content: string) {
       //获取初始化内容
@@ -154,7 +144,6 @@ export default defineComponent({
       //初始化表单
       this.editor = new Editor({
         content: `${parseHTML}`,
-        // content: ,
         extensions: [
           StarterKit.configure({ history: false }), //先取消撤销和重做
           Table,
@@ -162,54 +151,15 @@ export default defineComponent({
           TableCell,
           TableHeader,
         ],
-        onUpdate: this.updateOp,
+        onUpdate: ({ editor }) => {
+          console.log("更新后内容json", editor.getJSON());
+        },
+        onTransaction: ({ editor, transaction }) => {
+          const state = editor.state;
+          // console.log("transaction applied", transaction);
+          const changes = this.getChanges(transaction, state.doc);
+        },
       });
-      // this.applyOp({});
-    },
-    // 更新操作日志
-    updateOp({ editor, transaction }: EditorEvents["transaction"]) {
-      if (this.isCommandsTrigger) return;
-      //操作原子化
-      const newlog = {
-        type: "",
-        diff_content: "",
-        position: 0,
-        diff_length: 0,
-        update_time: new Date().getTime(),
-        op_user: this.userInfo._id,
-        doc_id: this.docInfo._id,
-      };
-      const state = editor.state;
-      // console.log("transaction applied", transaction);
-      const changes = this.getChanges(transaction, state.doc)[0];
-      if (changes) {
-        console.log("changes", changes);
-        // 有变化
-        if (changes.after) {
-          // 新增
-          newlog.type = "insert";
-          newlog.diff_content = changes.after;
-          newlog.position = changes.from;
-          newlog.diff_length = changes.to - changes.from;
-          console.log("newlog", newlog);
-          //----NOTE：发送操作日志
-          this.socket.sendAsString("oplog", newlog);
-          // 更新最新的content
-          this.docInfo.content = JSON.stringify(this.editor.getJSON());
-        } else {
-          if (changes.from !== changes.to) {
-            // 删除
-            newlog.type = "delete";
-            newlog.diff_length = changes.to - changes.from;
-            newlog.position = changes.from;
-            console.log("newlog", newlog);
-            //----NOTE：发送操作日志
-            this.socket.sendAsString("oplog", newlog);
-            // 更新最新的content
-            this.docInfo.content = JSON.stringify(this.editor.getJSON());
-          }
-        }
-      }
     },
     // 获取详细字符串内容变化
     getChanges(transaction: Transaction, doc: any) {
@@ -224,6 +174,7 @@ export default defineComponent({
           : "";
         changes.push({ from, to, before, after });
       });
+      console.log("ddchange", changes);
       return changes;
     },
     // 设置光标所在的位置
@@ -251,47 +202,12 @@ export default defineComponent({
     },
     //应用操作日志更新内容
     applyOp(msg: any) {
-      // ---test
-      // const new_log = {
-      //   type: "delete",
-      //   diff_content: "",
-      //   position: 109,
-      //   diff_length: 3,
-      //   update_time: 1730018945848,
-      //   op_user: "66d427b805a349637b5531fc",
-      //   doc_id: "67177d42b2b46e815e9b4e14",
-      // };
-      // this.insertTextAtPosition(
-      //   new_log.diff_content,
-      //   new_log.position,
-      //   new_log.position + new_log.diff_length
-      // );
       try {
         const op = msg.data;
-        console.log("receive op", op);
-        if (typeof op === "object") {
-          if (op.type === "insert" || op.type === "delete") {
-            this.insertTextAtPosition(
-              op.diff_content,
-              op.position,
-              op.position + op.diff_length
-            );
-            // 更新最新的content
-            this.docInfo.content = JSON.stringify(this.editor.getJSON());
-          }
-        }
+        console.log("op", op);
       } catch (e) {
         console.log(e);
       }
-    },
-    insertTextAtPosition(text: string, from_pos: number, to_pos: number) {
-      this.isCommandsTrigger = true;
-      this.editor.commands.setTextSelection({
-        from: from_pos,
-        to: to_pos,
-      });
-      this.editor.commands.insertContent(text);
-      this.isCommandsTrigger = false;
     },
   },
 });
