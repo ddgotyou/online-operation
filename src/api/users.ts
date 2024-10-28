@@ -1,10 +1,11 @@
 //向http://localhost:3000/users发送请求 获取用户数据
 import axios from "axios";
 import type { QueryUser } from "@/types/userType";
-import { ENV_SERVER } from "@/global";
+import { ENV_SERVER_PROD, ENV_SERVER_DEV } from "@/global";
 
 //配置axios默认baseURL
-axios.defaults.baseURL = ENV_SERVER;
+axios.defaults.baseURL =
+  process.env.NODE_ENV === "production" ? ENV_SERVER_PROD : ENV_SERVER_DEV;
 export const queryUser = async (param: QueryUser) => {
   const { user_name, password } = param;
   try {

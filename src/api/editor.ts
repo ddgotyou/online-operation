@@ -1,8 +1,9 @@
 import axios from "axios";
-import { ENV_SERVER } from "@/global";
+import { ENV_SERVER_PROD, ENV_SERVER_DEV } from "@/global";
 import { DocType } from "@/types/docType";
 //配置axios默认baseURL
-axios.defaults.baseURL = ENV_SERVER;
+axios.defaults.baseURL =
+  process.env.NODE_ENV === "production" ? ENV_SERVER_PROD : ENV_SERVER_DEV;
 //获取文档信息
 export async function getDocInfo(params: { doc_id: string }): Promise<DocType> {
   try {
