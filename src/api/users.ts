@@ -4,8 +4,10 @@ import type { QueryUser } from "@/types/userType";
 import { ENV_SERVER_PROD, ENV_SERVER_DEV } from "@/global";
 
 //配置axios默认baseURL
-axios.defaults.baseURL =
-  process.env.NODE_ENV === "production" ? ENV_SERVER_PROD : ENV_SERVER_DEV;
+// axios.defaults.baseURL =
+//   process.env.NODE_ENV === "production" ? ENV_SERVER_PROD : ENV_SERVER_DEV;
+axios.defaults.baseURL = ENV_SERVER_DEV;
+
 export const queryUser = async (param: QueryUser) => {
   const { user_name, password } = param;
   try {

@@ -1,5 +1,6 @@
 export const USER_KEY = "app_user_info";
-export const ENV_SERVER_DEV = "http://localhost:3000";
+// export const ENV_SERVER_DEV = "http://localhost:3000";
+export const ENV_SERVER_DEV = "http://localhost:10009";
 export const ENV_SERVER_PROD =
   "https://online-operate-backend-ddgotyous-projects.vercel.app";
 export const WS_SERVER = "ws://localhost:1234";
