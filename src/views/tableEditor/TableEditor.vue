@@ -3,7 +3,11 @@
     <h1>This is an table editor page</h1>
     <div class="user-list">
       <template v-for="(item, index) in onlineUserList" :key="index">
-        <Avatar :bgcolor="colorMap[item._id]" :name="item.user_name[0]" />
+        <Avatar
+          :bgcolor="colorMap[item._id]"
+          :name="item.user_name[0]"
+          v-if="item.user_name"
+        />
       </template>
     </div>
     <div id="sheet-container" class="sheet-container">
