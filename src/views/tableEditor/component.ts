@@ -89,6 +89,18 @@ export default defineComponent({
     this.socket.ping();
   },
   watch: {
+    "docInfo.content": {
+      handler(newVal) {
+        if (newVal) {
+          // console.log("更新的文档内容", newVal);
+          const timer = setTimeout(() => {
+            // 保存文档
+            this.save();
+            clearInterval(timer);
+          }, 500);
+        }
+      },
+    },
     onlineUserList: {
       handler(newVal: any, oldVal: any) {
         if (newVal && oldVal && newVal.length !== oldVal.length) {
