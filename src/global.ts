@@ -1,9 +1,9 @@
 export const USER_KEY = "app_user_info";
 // export const ENV_SERVER_DEV = "http://localhost:3000";
-export const ENV_SERVER_DEV = "http://192.168.76.182:10009";
+export const ENV_SERVER_DEV = "http://172.20.10.12:10009";
 export const ENV_SERVER_PROD =
   "https://online-operate-backend-ddgotyous-projects.vercel.app";
-export const WS_SERVER = "ws://192.168.76.182:1234";
+export const WS_SERVER = "ws://172.20.10.12:1234";
 
 export const USER_COLOR_LIST = [
   "#FF5733",
