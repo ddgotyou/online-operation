@@ -168,6 +168,7 @@ export default defineComponent({
     },
     // 更新操作日志
     updateOp({ editor, transaction }: EditorEvents["transaction"]) {
+      console.log("eee", this.editor);
       if (this.isCommandsTrigger) return;
       //操作原子化
       const newlog = {
@@ -286,11 +287,17 @@ export default defineComponent({
     },
     insertTextAtPosition(text: string, from_pos: number, to_pos: number) {
       this.isCommandsTrigger = true;
-      this.editor.commands.setTextSelection({
-        from: from_pos,
-        to: to_pos,
-      });
-      this.editor.commands.insertContent(text);
+      this.editor.commands.insertContentAt(
+        { from: from_pos, to: to_pos },
+        text,
+        { updateSelection: false }
+      );
+      // this.editor.commands.setTextSelection({
+      //   from: from_pos,
+      //   to: to_pos,
+      // });
+      // this.editor.commands.insertContent(text);
+
       this.isCommandsTrigger = false;
     },
   },
