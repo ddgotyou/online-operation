@@ -1922,7 +1922,7 @@
     "@univerjs/core" "0.4.2"
     "@univerjs/engine-render" "0.4.2"
 
-"@univerjs/core@0.4.2":
+"@univerjs/core@^0.4.2", "@univerjs/core@0.4.2":
   version "0.4.2"
   resolved "https://registry.npmmirror.com/@univerjs/core/-/core-0.4.2.tgz"
   integrity sha512-hNhFNTtjbjUhLldyS92sgAKStVNMCdrqiivWiq99yqlKsfudo3GutS5+kYRzSZ0m0cZuM2hfQVong37ZPTFNbg==
@@ -1946,7 +1946,7 @@
     "@univerjs/protocol" "0.1.39-alpha.38"
     "@univerjs/sheets" "0.4.2"
 
-"@univerjs/design@0.4.2":
+"@univerjs/design@^0.4.2", "@univerjs/design@0.4.2":
   version "0.4.2"
   resolved "https://registry.npmmirror.com/@univerjs/design/-/design-0.4.2.tgz"
   integrity sha512-vTTXmVO4ox+VsFU1jXN2Oqja/wl1Q5fh+Uq5dva4j19F1T6NtfxpQQw25oatVrCAk8PHUOKEl+8Kg8wn1IWvKg==
@@ -1973,7 +1973,15 @@
     react-mentions "^4.4.10"
     react-transition-group "^4.4.5"
 
-"@univerjs/docs-ui@0.4.2":
+"@univerjs/docs-hyper-link@0.4.2":
+  version "0.4.2"
+  resolved "https://registry.npmmirror.com/@univerjs/docs-hyper-link/-/docs-hyper-link-0.4.2.tgz"
+  integrity sha512-wiNSvpLphpT7krkSZ/kUgsJr6EfGugRuKd+meK9bEjEVgrbR5aSakDRtKrNth9Z4CUjyt437qPWhUVQV0Wm3/A==
+  dependencies:
+    "@univerjs/core" "0.4.2"
+    "@univerjs/icons" "^0.1.84"
+
+"@univerjs/docs-ui@^0.4.2", "@univerjs/docs-ui@0.4.2":
   version "0.4.2"
   resolved "https://registry.npmmirror.com/@univerjs/docs-ui/-/docs-ui-0.4.2.tgz"
   integrity sha512-p8d7zHnmMPmIvWLYGgpuu1s1eYElrfgW+GmCwDcgUkyy8rsXDXkV1/qZSJxDismiD2tbBpc1kdgF9dv7Hj4fxg==
@@ -1987,13 +1995,26 @@
     "@univerjs/ui" "0.4.2"
     clsx "^2.1.1"
 
-"@univerjs/docs@0.4.2":
+"@univerjs/docs@^0.4.2", "@univerjs/docs@0.4.2":
   version "0.4.2"
   resolved "https://registry.npmmirror.com/@univerjs/docs/-/docs-0.4.2.tgz"
   integrity sha512-GJHY67zdfOrBDg7qDIj22YvNjCw+iHaYxAHxhi+LDCow9qdQE8RgpVmQV6U4GksZssFCBfsfykE9XXH7mxXCGQ==
   dependencies:
     "@univerjs/core" "0.4.2"
     "@univerjs/engine-render" "0.4.2"
+
+"@univerjs/drawing-ui@0.4.2":
+  version "0.4.2"
+  resolved "https://registry.npmmirror.com/@univerjs/drawing-ui/-/drawing-ui-0.4.2.tgz"
+  integrity sha512-i/ItthNbrWe4RvVS5QRzaCmYQsEzIXWXXpg/+S+G3lubm5DWpb3ncRUrkLvu+M169RGaq+UwshZJPgyLGSV7uw==
+  dependencies:
+    "@univerjs/core" "0.4.2"
+    "@univerjs/design" "0.4.2"
+    "@univerjs/drawing" "0.4.2"
+    "@univerjs/engine-render" "0.4.2"
+    "@univerjs/icons" "^0.1.84"
+    "@univerjs/ui" "0.4.2"
+    clsx "^2.1.1"
 
 "@univerjs/drawing@0.4.2":
   version "0.4.2"
@@ -2004,7 +2025,7 @@
     "@univerjs/icons" "^0.1.84"
     ot-json1 "^1.0.2"
 
-"@univerjs/engine-formula@0.4.2":
+"@univerjs/engine-formula@^0.4.2", "@univerjs/engine-formula@0.4.2":
   version "0.4.2"
   resolved "https://registry.npmmirror.com/@univerjs/engine-formula/-/engine-formula-0.4.2.tgz"
   integrity sha512-q4/tCO4PkNco2QRVozsQ3kbiOXcmyENegxpOkRoaL5n1ertVFZvcOJQSOetmIi64aLtLKGeca1b30AsGKuWOjg==
@@ -2020,7 +2041,7 @@
   resolved "https://registry.npmmirror.com/@univerjs/engine-numfmt/-/engine-numfmt-0.4.2.tgz"
   integrity sha512-Top2SUAbI2b9tgtu/uJaX9KYZQmCwEWw5gKoU03tFMVVSu9dYp9WtIwHRfuh2iGOsxAXzL7gfnBsqGhzbFaNkg==
 
-"@univerjs/engine-render@0.4.2":
+"@univerjs/engine-render@^0.4.2", "@univerjs/engine-render@0.4.2":
   version "0.4.2"
   resolved "https://registry.npmmirror.com/@univerjs/engine-render/-/engine-render-0.4.2.tgz"
   integrity sha512-GKz5chhVkGPwU7SKk104959cggzFj+j9IigAxrre5xnG+NV2q0VOZuCPUxrpbAMxZWyDobuBseyfBu6/TYFRgA==
@@ -2032,7 +2053,37 @@
     franc-min "^6.2.0"
     opentype.js "^1.3.4"
 
-"@univerjs/icons@^0.1.78", "@univerjs/icons@^0.1.84":
+"@univerjs/facade@^0.4.2":
+  version "0.4.2"
+  resolved "https://registry.npmmirror.com/@univerjs/facade/-/facade-0.4.2.tgz"
+  integrity sha512-xZdxxFLjpNGNbXiyOlbziBtm+dh3nv5azTA/sAQWHlAExMOs4cIdOOKwdvv1EGlM8foR6rl3oh5hYS0eflQoSA==
+  dependencies:
+    "@univerjs/core" "0.4.2"
+    "@univerjs/data-validation" "0.4.2"
+    "@univerjs/docs" "0.4.2"
+    "@univerjs/docs-ui" "0.4.2"
+    "@univerjs/engine-formula" "0.4.2"
+    "@univerjs/engine-render" "0.4.2"
+    "@univerjs/network" "0.4.2"
+    "@univerjs/sheets" "0.4.2"
+    "@univerjs/sheets-conditional-formatting" "0.4.2"
+    "@univerjs/sheets-crosshair-highlight" "0.4.2"
+    "@univerjs/sheets-data-validation" "0.4.2"
+    "@univerjs/sheets-drawing-ui" "0.4.2"
+    "@univerjs/sheets-filter" "0.4.2"
+    "@univerjs/sheets-filter-ui" "0.4.2"
+    "@univerjs/sheets-formula" "0.4.2"
+    "@univerjs/sheets-hyper-link" "0.4.2"
+    "@univerjs/sheets-hyper-link-ui" "0.4.2"
+    "@univerjs/sheets-numfmt" "0.4.2"
+    "@univerjs/sheets-thread-comment" "0.4.2"
+    "@univerjs/sheets-ui" "0.4.2"
+    "@univerjs/thread-comment" "0.4.2"
+    "@univerjs/thread-comment-ui" "0.4.2"
+    "@univerjs/ui" "0.4.2"
+    "@univerjs/watermark" "0.4.2"
+
+"@univerjs/icons@^0.1.78", "@univerjs/icons@^0.1.80", "@univerjs/icons@^0.1.84":
   version "0.1.87"
   resolved "https://registry.npmmirror.com/@univerjs/icons/-/icons-0.1.87.tgz"
   integrity sha512-YSrFS+eBcwawuHbeTP+25E9SdNgkcyFvBWXJi0JAFUqStQGHTQtoGQRNFMgkKetJZqKCyg8h2dvyynYZIiwSaA==
@@ -2068,6 +2119,51 @@
     "@univerjs/sheets" "0.4.2"
     dayjs "^1.11.13"
 
+"@univerjs/sheets-crosshair-highlight@0.4.2":
+  version "0.4.2"
+  resolved "https://registry.npmmirror.com/@univerjs/sheets-crosshair-highlight/-/sheets-crosshair-highlight-0.4.2.tgz"
+  integrity sha512-2WMN8sRwDOXFbTnv2mx0Hg7Y1AbBqZty81HHUN1SYAQgplF9XRfOzFkeZjxLFnoyhEBaGQ7v0Rd3lxCQqciOPw==
+  dependencies:
+    "@univerjs/core" "0.4.2"
+    "@univerjs/engine-render" "0.4.2"
+    "@univerjs/icons" "^0.1.84"
+    "@univerjs/sheets" "0.4.2"
+    "@univerjs/sheets-ui" "0.4.2"
+    "@univerjs/ui" "0.4.2"
+    clsx "^2.1.1"
+
+"@univerjs/sheets-data-validation@0.4.2":
+  version "0.4.2"
+  resolved "https://registry.npmmirror.com/@univerjs/sheets-data-validation/-/sheets-data-validation-0.4.2.tgz"
+  integrity sha512-GlGo7CuvpP1IKgJjAThwi5wHl7xk5AxM+EfIXOqXGrzzKb9tyOIFFb8VXHWoxQNJt9aAHqIcMrAuI+D39RwpWg==
+  dependencies:
+    "@flatten-js/interval-tree" "^1.1.3"
+    "@univerjs/core" "0.4.2"
+    "@univerjs/data-validation" "0.4.2"
+    "@univerjs/engine-formula" "0.4.2"
+    "@univerjs/icons" "^0.1.84"
+    "@univerjs/protocol" "0.1.39-alpha.38"
+    "@univerjs/sheets" "0.4.2"
+    "@univerjs/sheets-formula" "0.4.2"
+    dayjs "^1.11.13"
+
+"@univerjs/sheets-drawing-ui@0.4.2":
+  version "0.4.2"
+  resolved "https://registry.npmmirror.com/@univerjs/sheets-drawing-ui/-/sheets-drawing-ui-0.4.2.tgz"
+  integrity sha512-RYfpP3cb6msaW8rjDbHAJS64+hZ4I/f9z0FsOGN3bS59n+mexNMN+e4czH3aiiVk4AQ15CzG03m8nt74fEl64A==
+  dependencies:
+    "@univerjs/core" "0.4.2"
+    "@univerjs/design" "0.4.2"
+    "@univerjs/drawing" "0.4.2"
+    "@univerjs/drawing-ui" "0.4.2"
+    "@univerjs/engine-render" "0.4.2"
+    "@univerjs/icons" "^0.1.84"
+    "@univerjs/sheets" "0.4.2"
+    "@univerjs/sheets-drawing" "0.4.2"
+    "@univerjs/sheets-ui" "0.4.2"
+    "@univerjs/ui" "0.4.2"
+    clsx "^2.1.1"
+
 "@univerjs/sheets-drawing@0.4.2":
   version "0.4.2"
   resolved "https://registry.npmmirror.com/@univerjs/sheets-drawing/-/sheets-drawing-0.4.2.tgz"
@@ -2076,6 +2172,23 @@
     "@univerjs/core" "0.4.2"
     "@univerjs/drawing" "0.4.2"
 
+"@univerjs/sheets-filter-ui@0.4.2":
+  version "0.4.2"
+  resolved "https://registry.npmmirror.com/@univerjs/sheets-filter-ui/-/sheets-filter-ui-0.4.2.tgz"
+  integrity sha512-AyJyNcrRDthshsp6LlEwrXyaGn+TnnT6F65CMk/eieAjngi54g1C4IWth1H6/wn5xxGnP66pdo/8PHzKjv2YEQ==
+  dependencies:
+    "@univerjs/core" "0.4.2"
+    "@univerjs/design" "0.4.2"
+    "@univerjs/engine-render" "0.4.2"
+    "@univerjs/icons" "^0.1.84"
+    "@univerjs/rpc" "0.4.2"
+    "@univerjs/sheets" "0.4.2"
+    "@univerjs/sheets-filter" "0.4.2"
+    "@univerjs/sheets-ui" "0.4.2"
+    "@univerjs/ui" "0.4.2"
+    clsx "^2.1.1"
+    rc-virtual-list "^3.14.5"
+
 "@univerjs/sheets-filter@0.4.2":
   version "0.4.2"
   resolved "https://registry.npmmirror.com/@univerjs/sheets-filter/-/sheets-filter-0.4.2.tgz"
@@ -2083,6 +2196,56 @@
   dependencies:
     "@univerjs/core" "0.4.2"
     "@univerjs/sheets" "0.4.2"
+
+"@univerjs/sheets-formula-ui@^0.4.2", "@univerjs/sheets-formula-ui@0.4.2":
+  version "0.4.2"
+  resolved "https://registry.npmmirror.com/@univerjs/sheets-formula-ui/-/sheets-formula-ui-0.4.2.tgz"
+  integrity sha512-wQ8LYD9GrEpxj/oVCDeJ+a2GvbqJ33vo29NIIvwradmVJW0ourTMgqoZ3+bn7Mo6eMjEAbyhgcgvCYqD6aTEFA==
+  dependencies:
+    "@univerjs/core" "0.4.2"
+    "@univerjs/design" "0.4.2"
+    "@univerjs/docs" "0.4.2"
+    "@univerjs/docs-ui" "0.4.2"
+    "@univerjs/engine-formula" "0.4.2"
+    "@univerjs/engine-render" "0.4.2"
+    "@univerjs/icons" "^0.1.84"
+    "@univerjs/sheets" "0.4.2"
+    "@univerjs/sheets-formula" "0.4.2"
+    "@univerjs/sheets-numfmt" "0.4.2"
+    "@univerjs/sheets-ui" "0.4.2"
+    "@univerjs/ui" "0.4.2"
+    clsx "^2.1.1"
+
+"@univerjs/sheets-formula@^0.4.2", "@univerjs/sheets-formula@0.4.2":
+  version "0.4.2"
+  resolved "https://registry.npmmirror.com/@univerjs/sheets-formula/-/sheets-formula-0.4.2.tgz"
+  integrity sha512-/wiORACzQRnTZemBpvJHLn00STmk4AXFnCGifugMeLYW8q3QPnBIfaVevgAM19uQGHvjz/p0IvlaTPQi5CD0ZA==
+  dependencies:
+    "@univerjs/core" "0.4.2"
+    "@univerjs/docs" "0.4.2"
+    "@univerjs/engine-formula" "0.4.2"
+    "@univerjs/rpc" "0.4.2"
+    "@univerjs/sheets" "0.4.2"
+    "@univerjs/sheets-numfmt" "0.4.2"
+
+"@univerjs/sheets-hyper-link-ui@0.4.2":
+  version "0.4.2"
+  resolved "https://registry.npmmirror.com/@univerjs/sheets-hyper-link-ui/-/sheets-hyper-link-ui-0.4.2.tgz"
+  integrity sha512-xqoDXju05v1MdT/qvgHrW/5BGagU+gvHXuWRoYK5SrTbDH9JuPkCV7AJRLCXRWguLlz4tcKcQvl4nmhw3WQ5sg==
+  dependencies:
+    "@univerjs/core" "0.4.2"
+    "@univerjs/docs" "0.4.2"
+    "@univerjs/docs-hyper-link" "0.4.2"
+    "@univerjs/docs-ui" "0.4.2"
+    "@univerjs/engine-formula" "0.4.2"
+    "@univerjs/engine-render" "0.4.2"
+    "@univerjs/icons" "^0.1.84"
+    "@univerjs/sheets" "0.4.2"
+    "@univerjs/sheets-formula-ui" "0.4.2"
+    "@univerjs/sheets-hyper-link" "0.4.2"
+    "@univerjs/sheets-ui" "0.4.2"
+    "@univerjs/ui" "0.4.2"
+    clsx "^2.1.1"
 
 "@univerjs/sheets-hyper-link@0.4.2":
   version "0.4.2"
@@ -2094,7 +2257,52 @@
     "@univerjs/protocol" "0.1.39-alpha.38"
     "@univerjs/sheets" "0.4.2"
 
-"@univerjs/sheets-ui@0.4.2":
+"@univerjs/sheets-numfmt@0.4.2":
+  version "0.4.2"
+  resolved "https://registry.npmmirror.com/@univerjs/sheets-numfmt/-/sheets-numfmt-0.4.2.tgz"
+  integrity sha512-FgMksOZRQZfTgrVSPHgg2iLufmBOOBnckv0r4UJqMI8ITDnW0zFq0IeCy04kcDFn1MXKrLdSBD/473T8dxbjUg==
+  dependencies:
+    "@univerjs/core" "0.4.2"
+    "@univerjs/design" "0.4.2"
+    "@univerjs/engine-formula" "0.4.2"
+    "@univerjs/engine-numfmt" "0.4.2"
+    "@univerjs/engine-render" "0.4.2"
+    "@univerjs/icons" "^0.1.84"
+    "@univerjs/sheets" "0.4.2"
+    "@univerjs/sheets-ui" "0.4.2"
+    "@univerjs/ui" "0.4.2"
+
+"@univerjs/sheets-thread-comment-base@0.4.2":
+  version "0.4.2"
+  resolved "https://registry.npmmirror.com/@univerjs/sheets-thread-comment-base/-/sheets-thread-comment-base-0.4.2.tgz"
+  integrity sha512-6Pfft3rgiTFuGh6otFqiaHTHVbqoR/O405vZeug7xhuWmc2g+k1calLsQNS3sGHMq75rzBvw7OsyzLjy4BMnvw==
+  dependencies:
+    "@univerjs/core" "0.4.2"
+    "@univerjs/design" "0.4.2"
+    "@univerjs/engine-formula" "0.4.2"
+    "@univerjs/sheets" "0.4.2"
+    "@univerjs/thread-comment" "0.4.2"
+    "@univerjs/ui" "0.4.2"
+
+"@univerjs/sheets-thread-comment@0.4.2":
+  version "0.4.2"
+  resolved "https://registry.npmmirror.com/@univerjs/sheets-thread-comment/-/sheets-thread-comment-0.4.2.tgz"
+  integrity sha512-NW6dG9V3a41kPn1bYub1wcc2H7+gr0DJQSxoEtq/YNcF3F0e19Q+7EL2UBhFm0loGEeMaK2siS8NFduOg7gDaA==
+  dependencies:
+    "@univerjs/core" "0.4.2"
+    "@univerjs/design" "0.4.2"
+    "@univerjs/engine-formula" "0.4.2"
+    "@univerjs/engine-render" "0.4.2"
+    "@univerjs/icons" "^0.1.84"
+    "@univerjs/sheets" "0.4.2"
+    "@univerjs/sheets-thread-comment-base" "0.4.2"
+    "@univerjs/sheets-ui" "0.4.2"
+    "@univerjs/thread-comment" "0.4.2"
+    "@univerjs/thread-comment-ui" "0.4.2"
+    "@univerjs/ui" "0.4.2"
+    clsx "^2.1.1"
+
+"@univerjs/sheets-ui@^0.4.2", "@univerjs/sheets-ui@0.4.2":
   version "0.4.2"
   resolved "https://registry.npmmirror.com/@univerjs/sheets-ui/-/sheets-ui-0.4.2.tgz"
   integrity sha512-Qmw77G4+VodaSNEMk9geKzDKuHnCNqcieXSPDq6z5NzEZjiMaiQwV/pSiEh5ffXWPBXa+uXokNM1KH622lywOg==
@@ -2113,7 +2321,7 @@
     "@univerjs/ui" "0.4.2"
     clsx "^2.1.1"
 
-"@univerjs/sheets@0.4.2":
+"@univerjs/sheets@^0.4.2", "@univerjs/sheets@0.4.2":
   version "0.4.2"
   resolved "https://registry.npmmirror.com/@univerjs/sheets/-/sheets-0.4.2.tgz"
   integrity sha512-1fvoUuFmYZamc1Jg8SSWzhG+1pff2M6ezik44JwLDwUQODWQq6+OoBn2gIbewPaO2JrisC9UMN4ofSkwofK5Dw==
@@ -2131,6 +2339,23 @@
   dependencies:
     "@univerjs/core" "0.4.2"
 
+"@univerjs/thread-comment-ui@0.4.2":
+  version "0.4.2"
+  resolved "https://registry.npmmirror.com/@univerjs/thread-comment-ui/-/thread-comment-ui-0.4.2.tgz"
+  integrity sha512-XbwlyH/ZdoxaNT0JipNvor48wuFxd0cKNkACPXoQN5tZEYYrXzc9Dsy1wbtOWSR0CT70pFDN+wOkQXI2RAYlzQ==
+  dependencies:
+    "@univerjs/core" "0.4.2"
+    "@univerjs/design" "0.4.2"
+    "@univerjs/docs" "0.4.2"
+    "@univerjs/docs-ui" "0.4.2"
+    "@univerjs/engine-render" "0.4.2"
+    "@univerjs/icons" "^0.1.84"
+    "@univerjs/protocol" "0.1.39-alpha.38"
+    "@univerjs/thread-comment" "0.4.2"
+    "@univerjs/ui" "0.4.2"
+    clsx "^2.1.1"
+    dayjs "^1.11.13"
+
 "@univerjs/thread-comment@0.4.2":
   version "0.4.2"
   resolved "https://registry.npmmirror.com/@univerjs/thread-comment/-/thread-comment-0.4.2.tgz"
@@ -2139,7 +2364,7 @@
     "@univerjs/core" "0.4.2"
     "@univerjs/protocol" "0.1.39-alpha.38"
 
-"@univerjs/ui@0.4.2":
+"@univerjs/ui@^0.4.2", "@univerjs/ui@0.4.2":
   version "0.4.2"
   resolved "https://registry.npmmirror.com/@univerjs/ui/-/ui-0.4.2.tgz"
   integrity sha512-TkYWexVZRkktolkS6XZhObMVB6afh38hM4CHMjtgJB7C5k+0F8tcjWC3Fxvc0vZJqpLowtxwQlTkSUHyibp+5g==
@@ -2155,6 +2380,18 @@
     rc-util "^5.43.0"
   optionalDependencies:
     vue ">=3.0.0"
+
+"@univerjs/watermark@0.4.2":
+  version "0.4.2"
+  resolved "https://registry.npmmirror.com/@univerjs/watermark/-/watermark-0.4.2.tgz"
+  integrity sha512-ayilbIV3GCOTTjh4TEvqerSurfPDf/ItlANFZ10GQbqRmLrq6JwmmrlBiXIQ0qMwh0sa5UFZWldBuBoTQ7a+QA==
+  dependencies:
+    "@univerjs/core" "0.4.2"
+    "@univerjs/design" "0.4.2"
+    "@univerjs/engine-render" "0.4.2"
+    "@univerjs/icons" "^0.1.80"
+    "@univerjs/ui" "0.4.2"
+    clsx "^2.1.1"
 
 "@vant/popperjs@^1.3.0":
   version "1.3.0"
@@ -6822,7 +7059,7 @@ rc-util@^5.16.1, rc-util@^5.17.0, rc-util@^5.18.1, rc-util@^5.20.1, rc-util@^5.2
     "@babel/runtime" "^7.18.3"
     react-is "^18.2.0"
 
-rc-virtual-list@^3.5.2:
+rc-virtual-list@^3.14.5, rc-virtual-list@^3.5.2:
   version "3.15.0"
   resolved "https://registry.npmmirror.com/rc-virtual-list/-/rc-virtual-list-3.15.0.tgz"
   integrity sha512-dF2YQztqrU3ijAeWOqscTshCEr7vpimzSqAVjO1AyAmaqcHulaXpnGR0ptK5PXfxTUy48VkJOiglMIxlkYGs0w==
