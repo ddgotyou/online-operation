@@ -16,6 +16,8 @@
     "@tiptap/pm": "^2.8.0",
     "@tiptap/starter-kit": "^2.8.0",
     "@tiptap/vue-3": "^2.8.0",
+    "@univerjs-pro/collaboration": "^0.4.2",
+    "@univerjs-pro/collaboration-client": "^0.4.2",
     "@vant/touch-emulator": "^1.4.0",
     "axios": "^1.7.5",
     "core-js": "^3.8.3",
