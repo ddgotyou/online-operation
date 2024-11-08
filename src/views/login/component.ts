@@ -75,9 +75,13 @@ export default defineComponent({
         // this.$router.push({
         //   path: "/pic_editor",
         // });
-        //表格编辑界面
+        //tiptap表格编辑界面
+        // this.$router.push({
+        //   path: "/table_editor",
+        // });
+        //univer编辑界面
         this.$router.push({
-          path: "/table_editor",
+          path: "/univer_editor",
         });
       } else {
         //不存在用户

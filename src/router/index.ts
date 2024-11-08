@@ -17,6 +17,11 @@ const routes: Array<RouteRecordRaw> = [
     name: "tableEditor",
     component: () => import("../views/tableEditor/TableEditor.vue"),
   },
+  {
+    path: "/univer_editor",
+    name: "univerEditor",
+    component: () => import("../views/univerEditor/UniverEditor.vue"),
+  },
 ];
 
 const router = createRouter({

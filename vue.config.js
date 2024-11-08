@@ -1,4 +1,5 @@
 const { defineConfig } = require("@vue/cli-service");
+const { UniverPlugin } = require("@univerjs/webpack-plugin");
 const path = require("path");
 module.exports = defineConfig({
   transpileDependencies: true,
@@ -9,5 +10,6 @@ module.exports = defineConfig({
         "@": path.resolve("./src"),
       },
     },
+    plugins: [new UniverPlugin()],
   },
 });

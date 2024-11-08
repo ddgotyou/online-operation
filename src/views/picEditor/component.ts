@@ -18,7 +18,7 @@ export default defineComponent({
       localLogStack: [] as DocLogType[],
       //文本选择范围
       selectRange: 0,
-      listnerTimer: 0,
+      listnerTimer: 0 as any,
       //所有用户的焦点位置
       allUserfocusState: [] as FocusStateType[],
       // 当前用户的焦点状态

@@ -33,7 +33,7 @@ export default defineComponent({
       // websocket 通道
       socket: new WebSocketInstance("/ws"),
       onlineUserList: [] as UserInfo[],
-      listnerTimer: 0,
+      listnerTimer: 0 as any,
       //所有用户的焦点位置
       allUserfocusState: [] as FocusStateType[],
       // 当前用户的焦点状态

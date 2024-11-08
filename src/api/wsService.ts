@@ -8,7 +8,7 @@ class WebSocketInstance {
   userArr: UserInfo[];
   socket: WebSocket | null;
   userSocket: WebSocket | null;
-  hearbeatInterval: number | null;
+  hearbeatInterval: null | NodeJS.Timeout;
   pongLastTime: number;
   doc_id: string;
   focusUserArr: FocusStateType[];
@@ -23,7 +23,7 @@ class WebSocketInstance {
     this.userSocket = null;
     this.curUser = {} as UserInfo;
     //心跳定时器
-    this.hearbeatInterval = null;
+    this.hearbeatInterval = null as null | NodeJS.Timeout;
     // 后台心跳最后一次活跃时间
     this.pongLastTime = 0;
     //记录进入的文档id
