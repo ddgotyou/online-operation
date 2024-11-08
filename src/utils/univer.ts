@@ -33,6 +33,7 @@ export const initUniver = (container: string | HTMLElement): Univer => {
 
   univer.registerPlugin(UniverRenderEnginePlugin);
   univer.registerPlugin(UniverFormulaEnginePlugin);
+  // 可以是【dom的id字符串】/直接【用ref取dom实例】进行挂载
   univer.registerPlugin(UniverUIPlugin, {
     container: container,
   });
